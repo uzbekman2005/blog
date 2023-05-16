@@ -1,0 +1,205 @@
+basePath: /v1
+definitions:
+  aboutsh.CreateReq:
+    properties:
+      facebook:
+        type: string
+      intro:
+        type: string
+      linkedin:
+        type: string
+      resumelink:
+        type: string
+      telegram:
+        type: string
+      title:
+        type: string
+      youtube:
+        type: string
+    type: object
+  aboutsh.FullResponse:
+    properties:
+      body:
+        $ref: '#/definitions/aboutsh.FullResponseBody'
+      error_code:
+        type: integer
+      error_message:
+        type: string
+    type: object
+  aboutsh.FullResponseBody:
+    properties:
+      facebook:
+        type: string
+      id:
+        type: integer
+      intro:
+        type: string
+      linkedin:
+        type: string
+      resumelink:
+        type: string
+      telegram:
+        type: string
+      title:
+        type: string
+      youtube:
+        type: string
+    type: object
+  aboutsh.UpdateReq:
+    properties:
+      facebook:
+        type: string
+      id:
+        type: integer
+      intro:
+        type: string
+      linkedin:
+        type: string
+      resumelink:
+        type: string
+      telegram:
+        type: string
+      title:
+        type: string
+      youtube:
+        type: string
+    type: object
+  models.Response:
+    properties:
+      error_code:
+        type: integer
+      error_message:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: Here QA can test and frontend or mobile developers can get information
+    of API endpoints.
+  title: Blog site project API Endpoints
+  version: "1.0"
+paths:
+  /:
+    get:
+      description: Just to ensure that server is running
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Ping pong
+      tags:
+      - Ping
+  /about:
+    post:
+      consumes:
+      - application/json
+      description: Here about can be created.
+      parameters:
+      - description: post info
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/aboutsh.CreateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/aboutsh.FullResponse'
+      security:
+      - BearerAuth: []
+      summary: Create about
+      tags:
+      - About
+    put:
+      consumes:
+      - application/json
+      description: Here about can be Updated.
+      parameters:
+      - description: post info
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/aboutsh.UpdateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/aboutsh.FullResponse'
+      security:
+      - BearerAuth: []
+      summary: Update about
+      tags:
+      - About
+  /about/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Here about can be deleted.
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/aboutsh.FullResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete about
+      tags:
+      - About
+    get:
+      consumes:
+      - application/json
+      description: Here about can be got.
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/aboutsh.FullResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get about by id
+      tags:
+      - About
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

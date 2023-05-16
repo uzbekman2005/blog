@@ -1,0 +1,7 @@
+p, unauthorized, /v1/swagger/*, GET
+p, unauthorized, /, GET
+p, unauthorized, /v1/, GET
+p, unauthorized, /v1/*, GET
+p, unauthorized, /v1/*, POST
+p, unauthorized, /v1/*, PUT
+p, unauthorized, /v1/*, DELETE
