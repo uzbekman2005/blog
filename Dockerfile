@@ -13,5 +13,6 @@ FROM alpine:3.16
 WORKDIR /app
 
 COPY --from=builder /app .
+ENV DOT_ENV_PATH=config/.env
 
 CMD ["/app/main"]
