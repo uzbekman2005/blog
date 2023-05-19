@@ -1,7 +1,6 @@
 package config
 
 import (
-	"log"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -30,11 +29,11 @@ type Config struct {
 // Load loads environment vars and inflates Config
 func Load() Config {
 	dotenvFilePath := cast.ToString(GetOrReturnDefault("DOT_ENV_PATH", "config/test.env"))
-	err := godotenv.Load(dotenvFilePath)
+	godotenv.Load(dotenvFilePath)
 
-	if err != nil {
-		log.Fatal("Error loading .env file", err)
-	}
+	// if err != nil {
+	// 	log.Fatal("Error loading .env file", err)
+	// }
 	c := Config{}
 
 	c.Environment = cast.ToString(GetOrReturnDefault("ENVIRONMENT", "develop"))
